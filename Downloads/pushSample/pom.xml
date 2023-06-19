@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">  
+  <modelVersion>4.0.0</modelVersion>  
+  <parent> 
+    <groupId>org.springframework.boot</groupId>  
+    <artifactId>spring-boot-starter-parent</artifactId>  
+    <version>2.7.12</version>  
+    <relativePath/>  
+    <!-- lookup parent from repository --> 
+  </parent>  
+  <groupId>com.example</groupId>  
+  <artifactId>pushSample</artifactId>  
+  <version>0.0.1-SNAPSHOT</version>  
+  <name>pushSample</name>  
+  <description>Demo project for Spring Boot</description>  
+  <properties> 
+    <java.version>17</java.version> 
+  </properties>  
+  <dependencies> 
+    <dependency> 
+      <groupId>com.azure.spring</groupId>  
+      <artifactId>spring-cloud-azure-appconfiguration-config-web</artifactId>  
+      <version>4.8.0</version> 
+    </dependency>  
+    <dependency> 
+      <groupId>com.azure.spring</groupId>  
+      <artifactId>spring-cloud-azure-feature-management-web</artifactId>  
+      <version>4.8.0</version> 
+    </dependency>  
+    <dependency> 
+      <groupId>org.springframework.boot</groupId>  
+      <artifactId>spring-boot-starter-thymeleaf</artifactId> 
+    </dependency>  
+    <!-- Adds the Ability to Push Refresh -->  
+    <dependency> 
+      <groupId>org.springframework.boot</groupId>  
+      <artifactId>spring-boot-starter-actuator</artifactId> 
+    </dependency>  
+    <dependency> 
+      <groupId>com.azure.spring</groupId>  
+      <artifactId>spring-cloud-azure-appconfiguration-config-web</artifactId>  
+      <version>4.8.0</version> 
+    </dependency>  
+    <dependency> 
+      <groupId>org.springframework.boot</groupId>  
+      <artifactId>spring-boot-starter-web</artifactId> 
+    </dependency>  
+    <dependency> 
+      <groupId>org.springframework.boot</groupId>  
+      <artifactId>spring-boot-starter-test</artifactId>  
+      <scope>test</scope> 
+    </dependency> 
+  </dependencies>  
+  <build> 
+    <plugins> 
+      <plugin> 
+        <groupId>org.springframework.boot</groupId>  
+        <artifactId>spring-boot-maven-plugin</artifactId> 
+      </plugin>
+      <plugin>
+        <groupId>com.microsoft.azure</groupId>
+        <artifactId>azure-webapp-maven-plugin</artifactId>
+        <version>2.5.0</version>
+        <configuration>
+          <appSettings>
+            <!--suppress UnresolvedMavenProperty -->
+            <AppConfigurationConnectionString>${AppConfigurationConnectionString}</AppConfigurationConnectionString>
+          </appSettings>
+          <schemaVersion>v2</schemaVersion>
+          <subscriptionId>ab4b8f8f-09fa-49e1-9dd2-bca3f5891096</subscriptionId>
+          <resourceGroup>pushSample-1687187056626-rg</resourceGroup>
+          <appName>pushSample-1687187056626</appName>
+          <pricingTier>P1v2</pricingTier>
+          <region>canadacentral</region>
+          <runtime>
+            <os>Windows</os>
+            <javaVersion>Java 8</javaVersion>
+            <webContainer>Tomcat 8.5</webContainer> <!-- Or the version you want -->
+          </runtime>
+          <deployment>
+            <resources>
+              <resource>
+                <directory>${project.basedir}/target</directory>
+                <includes>
+                  <include>*.war</include>
+                </includes>
+              </resource>
+            </resources>
+          </deployment>
+        </configuration>
+      </plugin>
+    </plugins> 
+  </build> 
+</project>

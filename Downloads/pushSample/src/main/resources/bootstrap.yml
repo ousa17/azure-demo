@@ -1,0 +1,22 @@
+spring:
+  cloud:
+    azure:
+      appconfiguration:
+        stores:
+          - connection-string: ${APP_CONFIGURATION_CONNECTION_STRING}
+            monitoring:
+              enabled: true
+              refresh-interval: 30d
+              triggers:
+                - key: sentinel
+              push-notification:
+                primary-token:
+                  name: zNut
+                  secret: xC8M2GzPmts7nEE3kqkOz4NGq6AIJn0DPpBQPEEYh/c=
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: appconfiguration-refresh
